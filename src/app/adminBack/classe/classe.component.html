@@ -1,0 +1,53 @@
+<div class="card">
+  <div class="card-header" *ngIf="!formData().controls['id'].value">
+    <div class="row">
+      <h4>Ajout de nouvelle classe</h4> <mat-icon>add</mat-icon>
+    </div>
+  </div>
+  <div class="card-header" *ngIf="formData().controls['id'].value">
+    <div class="row">
+      <h4>Mise à jour des informations d'une classe</h4><mat-icon>edit</mat-icon>
+    </div>
+  </div>
+  <form class="card-body" [formGroup]="formData()">
+    <div *ngIf="formData().controls['id'].value" class="row">
+      <mat-form-field  appearance = "outline"  class="example-full-width">
+        <mat-label> Ref classe </mat-label>
+        <input  matInput  formControlName="id" readonly/>
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <mat-form-field  appearance = "outline"  class="example-full-width">
+        <mat-label> Libelle de la classe </mat-label>
+        <input  matInput  formControlName="nom"/>
+        <mat-error *ngIf="formData().controls['nom'].errors?.required">Ce champs est obligatoire</mat-error>
+        <mat-error *ngIf="formData().controls['nom'].errors?.minlength">5 caracteres minimum requis</mat-error>
+      </mat-form-field>
+      <mat-form-field  appearance = "outline" class="example-full-width">
+        <mat-label> Cycle </mat-label>
+        <mat-select formControlName="cycle">
+          <ng-container *ngFor="let cycle of cycles()">
+            <mat-option value="{{cycle.nom}}">{{cycle.nom}}</mat-option>
+          </ng-container>
+        </mat-select>
+        <mat-error *ngIf="formData().controls['cycle'].errors?.required">Vous devez selectionner un cycle</mat-error>
+      </mat-form-field>
+      <mat-form-field  appearance = "outline" class="example-full-width">
+        <mat-label>Frais d'inscription </mat-label>
+        <input  matInput formControlName="fraisInscription">
+        <mat-error  *ngIf="formData().controls['fraisInscription'].errors?.required">Vous devez renseigner les frais d'incription</mat-error>
+        <mat-error *ngIf="formData().controls['fraisInscription'].errors?.pattern">Type numerique attendu</mat-error>
+      </mat-form-field>
+      <mat-form-field  appearance = "outline" class="example-full-width">
+        <mat-label>Frais de scolarité </mat-label>
+        <input  matInput formControlName="fraisScolarite">
+        <mat-error *ngIf="formData().controls['fraisScolarite'].errors?.required">Vous devez renseigner les frais de scolarité</mat-error>
+        <mat-error *ngIf="formData().controls['fraisScolarite'].errors?.pattern">Type numerique attendu</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <button mat-raised-button color="primary" (click)="onSubmit()">Enregistrer</button>
+      <button mat-raised-button (click)="closeDialog()" color="danger">Fermer</button>
+    </div>
+  </form>
+</div>

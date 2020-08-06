@@ -1,0 +1,20 @@
+.button-row {
+  display : table-cell;
+  width : 300px ;
+}
+.card-header {
+  color: darkslategray;
+  min-height: 50px;
+}
+.card {
+  margin: 10px;
+  width: 100%;
+  min-width: 330px;
+}
+.mat-stroked-button {
+  margin: 5px;
+  width: 200px;
+}
+.mat-divider {
+  margin: 10px;
+}

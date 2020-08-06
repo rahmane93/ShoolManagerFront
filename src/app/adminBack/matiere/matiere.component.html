@@ -1,0 +1,61 @@
+<div class="card row">
+  <div class="card-header" *ngIf="!formData().controls['id'].value" align="right">
+    <div class="row">
+        <h4>Ajout de nouvelle matière</h4><mat-icon >add</mat-icon>
+    </div>
+  </div>
+  <div class="card-header" *ngIf="formData().controls['id'].value">
+    <div class="row">
+      <h4>Mise à jour d'une matière</h4>  <mat-icon>edit</mat-icon>
+    </div>
+  </div>
+  <form class="card-body" [formGroup] = "formData()">
+    <div *ngIf="formData().controls['id'].value" class="row">
+      <mat-form-field  appearance = "outline"  class="example-full-width">
+        <mat-label> Ref Matiere </mat-label>
+        <input  matInput  formControlName="id" readonly/>
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <mat-form-field  appearance = "outline"  class="example-full-width">
+        <mat-label > Libelle de la matière * </mat-label >
+        <input  matInput formControlName="nom"/>
+        <mat-error *ngIf="formData().controls['nom'].errors?.required">Ce champs est obligatoire</mat-error>
+        <mat-error *ngIf="formData().controls['nom'].errors?.minlength">5 caracteres minimum requis</mat-error>
+      </mat-form-field>
+      <mat-form-field  appearance = "outline" class="example-full-width">
+        <mat-label > Catégorie *</mat-label >
+        <mat-select formControlName="categorie">
+          <ng-container *ngFor="let cycle of categories()">
+            <mat-option value="{{cycle.nom}}">{{cycle.nom}}</mat-option>
+          </ng-container>
+        </mat-select>
+        <mat-error *ngIf="formData().controls['categorie'].errors?.required">Vous devez selectionner une catégorie</mat-error>
+      </mat-form-field>
+      <mat-form-field  appearance = "outline" class="example-full-width">
+        <mat-label > Nombre heure par semaine *</mat-label >
+        <input  matInput  formControlName="nbHeureHebdo">
+        <mat-error  *ngIf="formData().controls['nbHeureHebdo'].errors?.required">Vous devez renseigner les frais d'incription</mat-error>
+        <mat-error *ngIf="formData().controls['nbHeureHebdo'].errors?.pattern">Type numérique attendu</mat-error>
+      </mat-form-field>
+      <mat-form-field  appearance = "outline" class="example-full-width">
+        <mat-label >  Nombre heure total *</mat-label >
+        <input  matInput  formControlName="nbHeureTotal">
+        <mat-error  *ngIf="formData().controls['nbHeureTotal'].errors?.required">Vous devez renseigner les frais d'incription</mat-error>
+        <mat-error *ngIf="formData().controls['nbHeureTotal'].errors?.pattern">Type numerique attendu</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <mat-form-field appearance="outline" class="textarea">
+        <mat-label>Objectif de ce cours *</mat-label>
+        <textarea matInput  formControlName="objectif"></textarea>
+        <mat-error  *ngIf="formData().controls['objectif'].errors?.required">Vous devez renseigner les objectif de cette matière</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <button mat-raised-button color="primary" (click)="onSubmit()">Enregistrer</button>
+      <button mat-raised-button (click)="closeDialog()" color="danger">Fermer</button>
+    </div>
+
+  </form>
+</div>

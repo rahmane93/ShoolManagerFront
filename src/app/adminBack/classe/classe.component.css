@@ -1,0 +1,21 @@
+.mat-raised-button {
+  width : 300px ;
+  margin: 5px;
+}
+.card-header {
+  color: darkslategray;
+  height: 50px;
+}
+.example-full-width {
+  min-width: 300px;
+  margin: 5px;
+}
+.card {
+  margin: 10px;
+  min-width: 330px;
+  max-width: 635px;
+}
+h4 {
+  margin-right: 10px;
+  margin-left: 10px;
+}
